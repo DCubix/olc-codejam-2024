@@ -1,0 +1,24 @@
+[gd_scene load_steps=7 format=3 uid="uid://cjasdwjvlgenu"]
+
+[ext_resource type="PackedScene" uid="uid://ccffpqximcct1" path="res://scenes/track1.blend" id="1_gtpob"]
+[ext_resource type="Texture2D" uid="uid://bc4447dxlbx67" path="res://textures/asphalt.png" id="2_s8qr3"]
+[ext_resource type="Texture2D" uid="uid://ssbwyed2sw86" path="res://textures/concrete_barrier.png" id="3_dn4kw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4jm75"]
+albedo_texture = ExtResource("2_s8qr3")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q3rvq"]
+albedo_texture = ExtResource("3_dn4kw")
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bxb67"]
+friction = 0.1
+absorbent = true
+
+[node name="track1" instance=ExtResource("1_gtpob")]
+
+[node name="Plane" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4jm75")
+surface_material_override/1 = SubResource("StandardMaterial3D_q3rvq")
+
+[node name="StaticBody3D" parent="Plane" index="0"]
+physics_material_override = SubResource("PhysicsMaterial_bxb67")

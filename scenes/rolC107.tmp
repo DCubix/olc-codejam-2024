@@ -1,0 +1,114 @@
+[gd_scene load_steps=14 format=3 uid="uid://djottac2tcel"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://bty8yn16833g2" path="res://materials/roller_physics_mat.tres" id="1_6dw58"]
+[ext_resource type="Script" path="res://scripts/RollerCart.gd" id="1_kwpkd"]
+[ext_resource type="PackedScene" uid="uid://ds1ge27myj6qg" path="res://scenes/roller_cart_model.tscn" id="3_7elwe"]
+[ext_resource type="Material" uid="uid://c7d78mo7eyfb1" path="res://materials/checkerboard.tres" id="4_28dn0"]
+[ext_resource type="Texture2D" uid="uid://thklyp1673al" path="res://textures/rosendal_plains_1_2k.hdr" id="5_3o4xc"]
+[ext_resource type="Script" path="res://scripts/camera_follow.gd" id="5_thhrb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_42fsh"]
+size = Vector3(1.70532, 0.356804, 2.68213)
+
+[sub_resource type="BoxMesh" id="BoxMesh_y4m5l"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_md1ex"]
+size = Vector3(64.1914, 0.175781, 64.5701)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_5kb2t"]
+panorama = ExtResource("5_3o4xc")
+
+[sub_resource type="Sky" id="Sky_qfnlx"]
+sky_material = SubResource("PanoramaSkyMaterial_5kb2t")
+
+[sub_resource type="Environment" id="Environment_7sxku"]
+background_mode = 2
+background_energy_multiplier = 1.07
+sky = SubResource("Sky_qfnlx")
+ambient_light_source = 3
+ambient_light_energy = 1.23
+reflected_light_source = 2
+tonemap_mode = 2
+tonemap_exposure = 0.92
+tonemap_white = 0.84
+ssao_enabled = true
+ssao_radius = 0.77
+ssao_intensity = 1.09
+ssao_power = 1.06066
+sdfgi_enabled = true
+adjustment_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_7vlmv"]
+exposure_multiplier = 0.845
+auto_exposure_enabled = true
+dof_blur_far_enabled = true
+dof_blur_far_distance = 5.69
+dof_blur_near_enabled = true
+dof_blur_near_distance = 1.26
+dof_blur_amount = 0.18
+
+[node name="Node3D" type="Node3D"]
+
+[node name="roller_cart" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0597219, 3.66451, -7.02396)
+mass = 10.0
+physics_material_override = ExtResource("1_6dw58")
+script = ExtResource("1_kwpkd")
+BrakingForce = 1200.0
+
+[node name="roller_cart_model" parent="roller_cart" instance=ExtResource("3_7elwe")]
+
+[node name="roller_cart_col" type="CollisionShape3D" parent="roller_cart"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0622063, 0.0236816)
+shape = SubResource("BoxShape3D_42fsh")
+
+[node name="left_brake" type="Marker3D" parent="roller_cart"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.185174, -0.0390699, 0.705269)
+gizmo_extents = 0.34
+
+[node name="right_brake" type="Marker3D" parent="roller_cart"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.185, -0.039, -0.705)
+gizmo_extents = 0.34
+
+[node name="steer" type="Marker3D" parent="roller_cart"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.22331)
+
+[node name="floor1" type="StaticBody3D" parent="."]
+transform = Transform3D(-3.97769e-08, 1.81241e-08, 1, 0.41463, 0.90999, 0, -0.90999, 0.41463, -4.37114e-08, 0.31314, 0.976656, -4.5278)
+
+[node name="floor_mesh" type="MeshInstance3D" parent="floor1"]
+transform = Transform3D(9.65767, 0, 0, 0, 0.181005, 0, 0, 0, 5.71336, 0, 0, 0)
+mesh = SubResource("BoxMesh_y4m5l")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("4_28dn0")
+
+[node name="floor_col" type="CollisionShape3D" parent="floor1"]
+transform = Transform3D(1, 5.96046e-08, 0, -5.96046e-08, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_md1ex")
+
+[node name="floor2" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.26169, -0.940601, 25.4002)
+
+[node name="floor_mesh" type="MeshInstance3D" parent="floor2"]
+transform = Transform3D(64, 0, 0, 0, 0.181, 0, 0, 0, 64, 0, 0, 0)
+mesh = SubResource("BoxMesh_y4m5l")
+surface_material_override/0 = ExtResource("4_28dn0")
+
+[node name="floor_col" type="CollisionShape3D" parent="floor2"]
+shape = SubResource("BoxShape3D_md1ex")
+
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
+transform = Transform3D(-1, 2.18889e-08, -8.46382e-08, 0, 0.968148, 0.25038, 8.74228e-08, 0.25038, -0.968148, 0, 6.74, -14.94)
+current = true
+script = ExtResource("5_thhrb")
+target = NodePath("../roller_cart")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.505612, 0.804932, -0.310549, 0, 0.359948, 0.932972, 0.862761, -0.471722, 0.181994, -1.16472, 3.49915, 0.682575)
+light_energy = 0.515
+shadow_enabled = true
+shadow_blur = 1.286
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7sxku")
+camera_attributes = SubResource("CameraAttributesPractical_7vlmv")

@@ -1,0 +1,110 @@
+[gd_scene load_steps=12 format=3 uid="uid://dso1gd847u0m1"]
+
+[ext_resource type="PackedScene" uid="uid://c3tmdcq268tqe" path="res://character.glb" id="1_pi5bi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4y5tb"]
+ao_enabled = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ftyyp"]
+animation = &"chr_turn_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uphmp"]
+animation = &"chr_turn_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hnwdu"]
+animation = &"chr_idle"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_7swbv"]
+filters = ["dude_skel/Skeleton3D:Bone", "dude_skel/Skeleton3D:Bone.001", "dude_skel/Skeleton3D:Bone.005", "dude_skel/Skeleton3D:Bone.009", "dude_skel/Skeleton3D:Bone.017", "dude_skel/Skeleton3D:Bone.024", "dude_skel/Skeleton3D:Bone.027"]
+fadein_time = 0.25
+fadeout_time = 0.25
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_14bgo"]
+animation = &"chr_brake_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6j2ka"]
+animation = &"chr_brake_right"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_nnodh"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_14bgo")
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_6j2ka")
+blend_point_1/pos = 1.0
+
+[sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_u24xg"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_kar7g"]
+graph_offset = Vector2(-147.497, 47.0797)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_hnwdu")
+nodes/Animation/position = Vector2(-40, 180)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_ftyyp")
+"nodes/Animation 2/position" = Vector2(0, 0)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_uphmp")
+"nodes/Animation 3/position" = Vector2(40, 340)
+nodes/brake/node = SubResource("AnimationNodeOneShot_7swbv")
+nodes/brake/position = Vector2(620, 60)
+nodes/brake_dir/node = SubResource("AnimationNodeBlendSpace1D_nnodh")
+nodes/brake_dir/position = Vector2(380, 280)
+nodes/output/position = Vector2(860, 100)
+nodes/steering/node = SubResource("AnimationNodeBlend3_u24xg")
+nodes/steering/position = Vector2(280, 60)
+node_connections = [&"brake", 0, &"steering", &"brake", 1, &"brake_dir", &"output", 0, &"brake", &"steering", 0, &"Animation 2", &"steering", 1, &"Animation", &"steering", 2, &"Animation 3"]
+
+[node name="character" instance=ExtResource("1_pi5bi")]
+
+[node name="Skeleton3D" parent="dude_skel" index="0"]
+bones/0/position = Vector3(0, -0.673879, 0)
+bones/1/position = Vector3(0.855254, -0.0476172, 2.67748)
+bones/1/rotation = Quaternion(0.30447, 0.638194, 0.304463, 0.638208)
+bones/2/position = Vector3(0.926592, 1.15231, 2.20401)
+bones/3/position = Vector3(-0.832426, -0.0601015, 2.69193)
+bones/3/rotation = Quaternion(0.294096, 0.64304, 0.294089, 0.643054)
+bones/4/position = Vector3(-0.89235, 1.1106, 2.20434)
+bones/5/position = Vector3(0, 0.699539, 0.351931)
+bones/6/rotation = Quaternion(0.985385, 2.03132e-09, -7.43945e-08, 0.170343)
+bones/7/rotation = Quaternion(0.142285, 1.4946e-07, 1.24389e-08, 0.989826)
+bones/8/rotation = Quaternion(0.0257554, -0.0327721, -0.78557, 0.617367)
+bones/9/rotation = Quaternion(0.06723, -0.063572, -0.520016, 0.849131)
+bones/10/rotation = Quaternion(0.0381735, -4.80552e-05, -0.0632925, 0.997265)
+bones/11/rotation = Quaternion(0.232297, 0.0116652, 0.0534864, 0.971103)
+bones/12/rotation = Quaternion(1.51988e-07, -1.10415e-07, -0.367475, 0.930033)
+bones/13/rotation = Quaternion(1.49022e-07, 2.39928e-08, -0.502956, 0.864312)
+bones/14/rotation = Quaternion(1.19893e-07, 8.0291e-08, -0.495816, 0.868428)
+bones/16/rotation = Quaternion(-0.145965, 0.0718747, 0.0838497, 0.983106)
+bones/17/rotation = Quaternion(-0.181584, 0.118786, 0.12315, 0.968376)
+bones/18/rotation = Quaternion(0.036144, 0.0459918, 0.784907, 0.616846)
+bones/19/rotation = Quaternion(-0.138865, 0.0594815, 0.386766, 0.90972)
+bones/20/rotation = Quaternion(0.232442, 5.431e-05, 0.29853, 0.925662)
+bones/21/rotation = Quaternion(0.0914063, 0.000861792, -0.0345437, 0.995214)
+bones/22/rotation = Quaternion(-1.09395e-07, 1.56418e-07, 0.481993, 0.876175)
+bones/23/rotation = Quaternion(-5.80923e-08, 9.07729e-08, 0.327664, 0.944794)
+bones/24/rotation = Quaternion(-4.75469e-08, -2.07761e-07, 0.54295, 0.839765)
+bones/25/rotation = Quaternion(-0.0846564, 0.608353, 0.401153, 0.679571)
+bones/26/rotation = Quaternion(0.131378, -0.0744032, -0.130195, 0.979925)
+bones/27/rotation = Quaternion(0.0324757, -0.0499025, -0.234055, 0.970398)
+bones/28/position = Vector3(1.31315e-15, 1.8424, 0)
+bones/28/rotation = Quaternion(-0.108312, -1.13913e-14, -2.58237e-08, 0.994117)
+bones/29/position = Vector3(1.2114, 0.209648, -0.472586)
+bones/30/position = Vector3(1.80242, -1.03709, 0.341995)
+bones/31/position = Vector3(-1.41914, 0.0456066, -0.184537)
+bones/32/position = Vector3(-1.77388, -1.03937, 0.677566)
+bones/33/rotation = Quaternion(0.135727, 0.600584, -0.373228, 0.693958)
+bones/34/rotation = Quaternion(-0.108102, -0.244758, -0.645427, 0.715424)
+bones/35/rotation = Quaternion(-0.150116, 0.000671103, 0.429259, 0.890619)
+bones/36/rotation = Quaternion(0.00985472, -0.0586304, -0.586356, 0.807869)
+bones/38/rotation = Quaternion(-0.372677, 0.693834, 0.136363, 0.600926)
+bones/39/rotation = Quaternion(0.121321, 0.24404, -0.642595, 0.716098)
+bones/40/rotation = Quaternion(0.138407, -0.00070594, 0.421919, 0.896007)
+bones/41/rotation = Quaternion(-0.0103471, 0.0548696, -0.596777, 0.800462)
+
+[node name="dude" parent="dude_skel/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4y5tb")
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeBlendTree_kar7g")
+anim_player = NodePath("../AnimationPlayer")
+parameters/brake/active = false
+parameters/brake/internal_active = false
+parameters/brake/request = 0
+parameters/brake_dir/blend_position = 0.0
+parameters/steering/blend_amount = 0.0
