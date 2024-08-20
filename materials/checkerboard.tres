@@ -1,8 +1,0 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c7d78mo7eyfb1"]
-
-[ext_resource type="Texture2D" uid="uid://cyfq4gn3fvw4q" path="res://checkerboard.jpg" id="1_ix7ji"]
-
-[resource]
-albedo_color = Color(0.435192, 0.435192, 0.435192, 1)
-albedo_texture = ExtResource("1_ix7ji")
-uv1_scale = Vector3(6, 6, 2)
