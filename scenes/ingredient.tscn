@@ -1,0 +1,92 @@
+[gd_scene load_steps=15 format=3 uid="uid://b1cnkq3tqf5ph"]
+
+[ext_resource type="Script" path="res://scenes/ingredient.gd" id="1_yur3t"]
+[ext_resource type="ArrayMesh" uid="uid://c5ar1xs7glluq" path="res://models/burger/tomato.res" id="2_lmkyw"]
+[ext_resource type="Shader" uid="uid://dfw786vaaycwa" path="res://scripts/doneness.tres" id="3_d7wrv"]
+[ext_resource type="Texture2D" uid="uid://bksjskj48vyr5" path="res://textures/smoke1.png" id="4_sj7lx"]
+[ext_resource type="PackedScene" uid="uid://d3kuahpwn0d2t" path="res://scenes/reaction.tscn" id="5_ar1xo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4e3uf"]
+render_priority = 0
+shader = ExtResource("3_d7wrv")
+shader_parameter/temperature = 0.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_yk4hk"]
+height = 0.416683
+radius = 0.918818
+
+[sub_resource type="Curve" id="Curve_iu4io"]
+_data = [Vector2(0, 0), 0.0, 2.32268, 0, 0, Vector2(0.741935, 1), -3.95945e-07, -3.95945e-07, 0, 0, Vector2(1, 0), -11.4121, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_dd0ut"]
+curve = SubResource("Curve_iu4io")
+
+[sub_resource type="Curve" id="Curve_a26vt"]
+max_value = 3.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 3), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7d3or"]
+curve = SubResource("Curve_a26vt")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i28ar"]
+lifetime_randomness = 0.41
+emission_shape_scale = Vector3(0.7, 0.1, 0.7)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = -97.2
+angle_max = 90.8
+angular_velocity_min = -80.9
+angular_velocity_max = 80.9
+gravity = Vector3(0, 3, 0)
+attractor_interaction_enabled = false
+scale_min = 0.4
+scale_max = 5.0
+scale_over_velocity_min = 0.2
+scale_over_velocity_max = 6.0
+scale_over_velocity_curve = SubResource("CurveTexture_7d3or")
+alpha_curve = SubResource("CurveTexture_dd0ut")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ld7gd"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+disable_ambient_light = true
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 0.509804)
+albedo_texture = ExtResource("4_sj7lx")
+disable_receive_shadows = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_g2jte"]
+material = SubResource("StandardMaterial3D_ld7gd")
+size = Vector2(0.5, 0.5)
+
+[node name="ingredient" type="Node3D"]
+script = ExtResource("1_yur3t")
+mesh = ExtResource("2_lmkyw")
+
+[node name="ingredient_col" type="StaticBody3D" parent="."]
+
+[node name="ingredient_mesh" type="MeshInstance3D" parent="ingredient_col"]
+mesh = ExtResource("2_lmkyw")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4e3uf")
+
+[node name="ingredient_shape" type="CollisionShape3D" parent="ingredient_col"]
+shape = SubResource("CylinderShape3D_yk4hk")
+
+[node name="smoke" type="GPUParticles3D" parent="."]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_i28ar")
+draw_pass_1 = SubResource("QuadMesh_g2jte")
+
+[node name="reaction" parent="." instance=ExtResource("5_ar1xo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

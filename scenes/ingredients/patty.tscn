@@ -1,0 +1,16 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2ja1akl0rbht"]
+
+[ext_resource type="PackedScene" uid="uid://b1cnkq3tqf5ph" path="res://scenes/ingredient.tscn" id="1_mnha0"]
+[ext_resource type="ArrayMesh" uid="uid://03lor0fwrx06" path="res://models/burger/patty.res" id="2_7srsy"]
+[ext_resource type="Texture2D" uid="uid://c8lcjako271hu" path="res://textures/patty.png" id="3_tdnec"]
+[ext_resource type="Texture2D" uid="uid://boanxeaqsnflg" path="res://textures/fried_patty.png" id="4_b3dlv"]
+[ext_resource type="Texture2D" uid="uid://dfbgkvxq6elmc" path="res://textures/burnt_patty.png" id="5_wwdy3"]
+
+[node name="patty" type="Node3D"]
+
+[node name="ingredient" parent="." instance=ExtResource("1_mnha0")]
+label = "Patty"
+perfectTemperature = 125.0
+canBeFried = true
+mesh = ExtResource("2_7srsy")
+textures = Array[Texture2D]([ExtResource("3_tdnec"), ExtResource("4_b3dlv"), ExtResource("5_wwdy3")])

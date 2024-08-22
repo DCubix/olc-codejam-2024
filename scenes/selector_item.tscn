@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://r1llfs2j10fi"]
+
+[ext_resource type="Texture2D" uid="uid://byua2rh7o5fvy" path="res://textures/icons/generic_joystick.png" id="1_0h2uq"]
+
+[node name="selector_item" type="Node3D"]
+
+[node name="selector_sprite" type="Sprite3D" parent="."]
+pixel_size = 0.02
+billboard = 1
+texture = ExtResource("1_0h2uq")
+
+[node name="selector_desc" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14717, 0)
+pixel_size = 0.015
+billboard = 1
+render_priority = 10
+outline_render_priority = 9
+modulate = Color(0.656, 1, 0.52, 1)
+text = "Item"

@@ -1,0 +1,16 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3mic76l75ev2"]
+
+[ext_resource type="PackedScene" uid="uid://b1cnkq3tqf5ph" path="res://scenes/ingredient.tscn" id="1_uhlpp"]
+[ext_resource type="ArrayMesh" uid="uid://bjoadskwpc0yg" path="res://models/burger/bread_top.res" id="2_wobm3"]
+[ext_resource type="Texture2D" uid="uid://cwusg38t5w1vd" path="res://textures/bread.png" id="3_ebdda"]
+[ext_resource type="Texture2D" uid="uid://bmdnotcflqut5" path="res://textures/fried_bread.png" id="4_xlmqp"]
+[ext_resource type="Texture2D" uid="uid://qaertfac3cl8" path="res://textures/burnt_bread.png" id="5_0finq"]
+
+[node name="bread_bot" type="Node3D"]
+
+[node name="ingredient" parent="." instance=ExtResource("1_uhlpp")]
+label = "Bread Top"
+perfectTemperature = 120.0
+canBeFried = true
+mesh = ExtResource("2_wobm3")
+textures = Array[Texture2D]([ExtResource("3_ebdda"), ExtResource("4_xlmqp"), ExtResource("5_0finq")])

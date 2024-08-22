@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://s5ltcqipnjdm"]
+
+[ext_resource type="PackedScene" uid="uid://cbeiiljyy4c6m" path="res://scenes/ingredients/bread_bot.tscn" id="1_i52ij"]
+[ext_resource type="PackedScene" uid="uid://c3mic76l75ev2" path="res://scenes/ingredients/bread_top.tscn" id="2_1sxlq"]
+
+[node name="Bread" type="Node3D"]
+
+[node name="bread_bot" parent="." instance=ExtResource("1_i52ij")]
+
+[node name="bread_bot2" parent="." instance=ExtResource("2_1sxlq")]

@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://citg07ahdhfco"]
+
+[ext_resource type="Texture2D" uid="uid://eav1ogiurq0y" path="res://textures/bread_top_iconi.png" id="1_3xqog"]
+[ext_resource type="Texture2D" uid="uid://bqf3o1sacvjmo" path="res://textures/bread_bot_iconi.png" id="2_svbgb"]
+
+[node name="bread_selector" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.156
+anchor_bottom = 0.136
+offset_right = 0.287994
+offset_bottom = -0.128006
+alignment = 1
+
+[node name="top" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("1_3xqog")
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="bottom" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("2_svbgb")
+icon_alignment = 1
+vertical_icon_alignment = 0

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://ujp8cgbd3885"]
+
+[ext_resource type="ArrayMesh" uid="uid://captxvdrvm0vv" path="res://models/burger/tutterware.res" id="1_rlp6n"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nud6n"]
+transparency = 4
+cull_mode = 2
+albedo_color = Color(0.8736, 0.94416, 0.96, 0.486275)
+roughness = 0.37
+rim_enabled = true
+rim = 0.59
+rim_tint = 0.6
+
+[node name="container" type="Node3D"]
+
+[node name="tutterware" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.15, 0, 0, 0, 1.15, 0, 0, 0, 1.15, 0, 0, 0)
+mesh = ExtResource("1_rlp6n")
+surface_material_override/0 = SubResource("StandardMaterial3D_nud6n")

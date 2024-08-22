@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://ckx4cqmu1or2f"]
+
+[ext_resource type="PackedScene" uid="uid://ghwv2l05xnmn" path="res://models/computer.glb" id="1_k1dbf"]
+[ext_resource type="Texture2D" uid="uid://xrywqgqn4ib1" path="res://models/computer_computer.png" id="2_oit7t"]
+[ext_resource type="PackedScene" uid="uid://d3kuahpwn0d2t" path="res://scenes/reaction.tscn" id="3_kfu1a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_otfto"]
+albedo_texture = ExtResource("2_oit7t")
+roughness = 0.45
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3o7il"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.0695551, 0.0341245, 0.0158339, 1)
+emission_energy_multiplier = 2.0
+emission_texture = ExtResource("2_oit7t")
+
+[node name="computer2" instance=ExtResource("1_k1dbf")]
+
+[node name="computer" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_otfto")
+surface_material_override/1 = SubResource("StandardMaterial3D_3o7il")
+
+[node name="reaction" parent="." index="1" instance=ExtResource("3_kfu1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.92003, 0)

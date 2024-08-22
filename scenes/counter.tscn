@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsdjrbcrfov5k"]
+
+[ext_resource type="ArrayMesh" uid="uid://ldosi28glypi" path="res://models/burger/counter.res" id="1_qo2kc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lj70y"]
+size = Vector3(6.45117, 4.37714, 3.39197)
+
+[node name="counter" type="Node3D"]
+
+[node name="counter_col" type="StaticBody3D" parent="."]
+
+[node name="counter_mesh" type="MeshInstance3D" parent="counter_col"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.668493, 3.14328, 1.13676)
+mesh = ExtResource("1_qo2kc")
+skeleton = NodePath("../..")
+
+[node name="counter_shape" type="CollisionShape3D" parent="counter_col"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.18326, -0.0022583)
+shape = SubResource("BoxShape3D_lj70y")

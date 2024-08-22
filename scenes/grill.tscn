@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://p438xtkwkwy3"]
+
+[ext_resource type="ArrayMesh" uid="uid://bmntbdecrfuib" path="res://models/burger/grill.res" id="1_lsy8k"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hcs8v"]
+size = Vector3(6.21582, 4.37714, 3.39197)
+
+[node name="grill" type="Node3D"]
+
+[node name="grill_col" type="StaticBody3D" parent="."]
+
+[node name="grill_mesh" type="MeshInstance3D" parent="grill_col"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.668493, 3.14328, 1.13676)
+mesh = ExtResource("1_lsy8k")
+skeleton = NodePath("../..")
+
+[node name="grill_shape" type="CollisionShape3D" parent="grill_col"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.18326, -0.0022583)
+shape = SubResource("BoxShape3D_hcs8v")
